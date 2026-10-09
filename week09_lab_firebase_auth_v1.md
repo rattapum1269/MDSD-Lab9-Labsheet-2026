@@ -477,9 +477,23 @@ service cloud.firestore {
 
 > ✅ **Checkpoint 8.1** ถ่ายภาพหน้าจอผลการทดสอบทั้ง 4 ข้อ อธิบายว่าทำไมฟีเจอร์ที่พึ่งพา Local Database (Favorites, ร่างประกาศ) กับฟีเจอร์ที่พึ่งพา Firebase (โพสต์ขายจริง, ดูสินค้าจาก Firestore) จึงมีพฤติกรรมตอนออฟไลน์ต่างกัน
 
-```text
-บันทึกรูปผลลัพธ์ที่นี่ และคำอธิบาย
-```
+
+#### 1. ผลการทดสอบทั้ง 4 กรณี
+**ข้อที่ 1: สถานะการล็อกอิน (Session Persistence)** |แอปพลิเคชันเปิดเข้าสู่หน้าหลักโดยอัตโนมัติทันที ไม่ต้องกรอกอีเมลและรหัสผ่านเพื่อเข้าสู่ระบบใหม่ เนื่องจาก Firebase Auth จัดเก็บ Token/Session ไว้ใน Local Storage ของอุปกรณ์ให้อัตโนมัติ 
+**ข้อที่ 2: การทำงาน Offline กับ Local Database** | ข้อมูลรายการโปรดทั้งหมดยังคงแสดงผลและสามารถเปิดดู แก้ไข หรือลบได้ตามปกติอย่างราบรื่น
+**ข้อที่ 3: การทำงาน Offline กับ Cloud Services** | แอปพลิเคชันไม่เกิดอาการค้างหรือแครช  แต่มีการดักจับข้อผิดพลาดและแสดง SnackBar สีแดงแจ้งเตือน
+**ข้อที่ 4: การกู้คืนการเชื่อมต่อ (Reconnection)** | การอัปโหลดและบันทึกเอกสารลง Cloud Firestore สำเร็จ ร่างประกาศถูกลบออกจาก Local Database อัตโนมัติ
+#### 2. ภาพผลการทดสอบ
+ **ภาพข้อที่ 1:**
+<img width="1080" height="2400" alt="Screenshot_20261009_161723" src="https://github.com/user-attachments/assets/308a4dc9-301c-4a1b-9fe8-6dacdfd3206a" />
+ **ภาพข้อที่ 2:**
+ <img width="1080" height="2400" alt="Screenshot_20261009_161818" src="https://github.com/user-attachments/assets/292db8e5-ea15-4d81-ad6c-135b87bee801" />
+ **ภาพข้อที่ 3:**
+ <img width="1080" height="2400" alt="Screenshot_20261009_163205" src="https://github.com/user-attachments/assets/c464650d-ea14-4b06-afb8-7ae4a35bed33" />
+ **ภาพข้อที่ 4:**
+ <img width="1080" height="2400" alt="Screenshot_20261009_162146" src="https://github.com/user-attachments/assets/faa4d89d-0412-484e-977b-dbd5d10214df" />
+
+
 
 ---
 
