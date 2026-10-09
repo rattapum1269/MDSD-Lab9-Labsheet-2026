@@ -361,6 +361,7 @@ final pages = [
 และแก้ `HomePage` ให้เรียก `getItems()` จากทุก Repository ใน List พร้อมกันด้วย `Future.wait(...)` แล้วรวมผลลัพธ์เป็น List เดียวก่อนส่งให้ `ListView.builder` ใส่ Badge หรือไอคอนเล็ก ๆ บน `ItemCard` เพื่อบอกผู้ใช้ว่าแต่ละรายการมาจากแหล่งใด (เช่น 🏪 = จาก API, 🎓 = โพสต์จริงโดยนักศึกษา)
 
 > ✅ **Checkpoint 5.1** ถ่ายภาพหน้าจอ Home ที่แสดงสินค้าจากทั้งสองแหล่งข้อมูลปนกันอยู่ในลิสต์เดียว พร้อม Badge ที่แยกแหล่งที่มาชัดเจน (ถ้ายังไม่เคยมีประกาศจริงใน Firestore เลย ให้ทำส่วนที่ 6 ให้เสร็จก่อนแล้วย้อนกลับมาถ่ายภาพ Checkpoint นี้) อธิบายว่าการออกแบบให้ `HomePage` ไม่รู้จัก `ItemRepositoryApi`/`ItemRepositoryFirestore` โดยตรง แต่รู้จักผ่าน Interface `ItemRepository` เท่านั้น ช่วยให้ทดสอบหรือเปลี่ยนแหล่งข้อมูลในอนาคตง่ายขึ้นอย่างไร
+<img width="1080" height="2400" alt="1791536101433_temp" src="https://github.com/user-attachments/assets/5be2f0b6-23ab-4600-850b-7ca2a77d5410" />
 
 ```text
 
@@ -414,15 +415,13 @@ final pages = [
 
 > ✅ **Checkpoint 6.1** โพสต์ขายจริงอย่างน้อย 2 รายการผ่านแอป ถ่ายภาพหน้าจอ Firebase Console เมนู Firestore Database ที่แสดง Collection `items` มีเอกสารที่โพสต์เข้ามาจริง พร้อม field `sellerId` ที่ตรงกับ `uid` ของบัญชีที่ใช้ทดสอบ และยืนยันว่าร่างทั้งสองรายการหายไปจาก `MyDraftsPage` แล้ว
 
-```text
-บันทึกรูปผลลัพธ์ที่นี่
-```
+<img width="1867" height="875" alt="image" src="https://github.com/user-attachments/assets/d99422ab-853e-4fac-8934-f14f1a419555" />
+
+
 
 > ✅ **Checkpoint 6.2** ถ่ายภาพหน้าจอ Firebase Console เมนู Storage ที่แสดงไฟล์รูปภาพที่อัปโหลดสำเร็จ และภาพหน้าจอ Firestore ที่แสดงว่าเอกสารมี field `imageUrl` เป็น URL จริงที่เปิดดูได้ ถ่ายภาพหน้าจอแอปที่แสดงรูปสินค้านั้นบนหน้า Home ผ่าน `Image.network(imageUrl)` ด้วย (ย้อนกลับไปถ่ายภาพ Checkpoint 5.1 ให้ครบตอนนี้ ถ้ายังไม่ได้ทำ)
+<img width="1535" height="907" alt="image" src="https://github.com/user-attachments/assets/212b0a1d-a06a-4ec5-a74d-f1cc82dafd3c" />
 
-```text
-บันทึกรูปผลลัพธ์ที่นี่
-```
 
 ---
 
@@ -453,10 +452,16 @@ service cloud.firestore {
 
 > ✅ **Checkpoint 7.1 (Self-Study)** ถ่ายภาพหน้าจอผลการทดลองทั้ง 2 กรณีใน Rules Playground เขียนอธิบายสั้น ๆ ว่าทำไม Client-side Validation (การไม่แสดงปุ่มแก้ไขให้เห็น) เพียงอย่างเดียวจึงไม่เพียงพอต่อความปลอดภัยของข้อมูลจริง
 
-```text
-บันทึกรูปผลลัพธ์ที่นี่ และคำอธิบาย
-```
+- ก
+  <img width="1190" height="521" alt="image" src="https://github.com/user-attachments/assets/3e3c1ecf-b1d8-4b1f-9342-625bfc5451dc" />
 
+- ข
+  <img width="1082" height="465" alt="image" src="https://github.com/user-attachments/assets/adc3d646-336c-433f-ae46-aa4fc310b151" />
+
+```
+# ว่าทำไม Client-side Validation (การไม่แสดงปุ่มแก้ไขให้เห็น) เพียงอย่างเดียวจึงไม่เพียงพอต่อความปลอดภัยของข้อมูลจริง
+ตอบ การซ่อนปุ่มช่วยเเค่เรื่องประสบการณ์การใช้งานเท่านั้น แต่ความปลอดภัยที่แท้จริงต้องอาศัย Security Rules บนฝั่ง Server ในการตรวจสอบสิทธิ์ทุกครั้งที่มีการส่งข้อมูลเข้ามา
+```
 ---
 
 ## ส่วนที่ 8: ทดสอบสถานการณ์ Offline และสถานะการล็อกอิน
