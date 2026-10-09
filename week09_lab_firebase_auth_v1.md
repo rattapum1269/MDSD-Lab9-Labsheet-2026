@@ -268,9 +268,11 @@ Widget build(BuildContext context) {
 เพิ่มปุ่ม "ออกจากระบบ" ใน AppBar ของ `HomePage` ที่เรียก `AuthService().signOut()`
 
 > ✅ **Checkpoint 4.1** ถ่ายภาพหน้าจอ 3 ภาพเรียงกัน คือ (ก) แอปตอนเพิ่งเปิดขึ้นมาครั้งแรกแบบยังไม่ล็อกอิน แสดงหน้า Login (ข) หลังล็อกอินสำเร็จ แอปสลับไปแสดง `MainScaffold` อัตโนมัติโดยไม่ต้องกดอะไรเพิ่ม และ (ค) หลังกด "ออกจากระบบ" แอปสลับกลับไปหน้า Login เอง อธิบายว่าทำไมการใช้ `StreamBuilder` ฟัง `authStateChanges()` จึงทำให้ไม่ต้องเขียนโค้ดสั่ง Navigate ไปมาด้วยมือเลย
-
+<img width="1080" height="2400" alt="Screenshot_20261009_143652" src="https://github.com/user-attachments/assets/993aacb1-8c07-4a0d-a660-62067f18d2c7" />
+<img width="1080" height="2400" alt="Screenshot_20261009_143642" src="https://github.com/user-attachments/assets/cc700e93-9eaf-4426-9848-acf4c9dba581" />
+<img width="1080" height="2400" alt="Screenshot_20261009_143703" src="https://github.com/user-attachments/assets/738d7bf8-ebc6-4f8c-ac76-827dea682365" />
 ```text
-บันทึกรูปผลลัพธ์ที่นี่ (3 ภาพ) และคำอธิบาย
+เพราะ พราะ FirebaseAuth.instance.authStateChanges()  จะส่งข้อมูลออกมาเป็น Stream ของสถานะผู้ใช้แบบ Real-time ซึ่งจะส่ง Event ใหม่ทันทีที่มีการเปลี่ยนแปลงสถานะ
 ```
 
 ---
@@ -285,7 +287,12 @@ Widget build(BuildContext context) {
 2. ถ้าในอนาคตอาจารย์สั่งให้เปลี่ยนจาก Fake Store API ไปใช้ API อื่น ต้องแก้ไฟล์กี่ไฟล์ ถ้าทุก Widget เรียกผ่าน Interface `ItemRepository` เท่านั้น?
 
 ```text
-บันทึกคำตอบของคุณที่นี่
+1. ทำไมเราจึง "เพิ่ม Implementation ใหม่" (`ItemRepositoryFirestore`) แทนที่จะแก้ไข `ItemRepositoryApi` เดิม หรือเขียนโค้ดเรียก Firestore ตรงจาก `HomePage`?
+- ตามหลัก SRP แต่ละคลาสควรทำหน้าที่เดียว ไม่ควรเอามารวมให้วุ่นวาย
+- ตามหลัก OCP โค้ดควรเปิดให้ขยายการทำงาน ไม่ควรไปแก้ไขสิ่งที่รันได้ อาจทำให้เกิดสีแดง  = Error
+2. ถ้าในอนาคตอาจารย์สั่งให้เปลี่ยนจาก Fake Store API ไปใช้ API อื่น ต้องแก้ไฟล์กี่ไฟล์ ถ้าทุก Widget เรียกผ่าน Interface `ItemRepository` เท่านั้น?
+- แก้เพียง 2 ไฟล์เท่านั้น 1.ไฟล์ Repository ตัวใหม่ 2.ไฟล์จุด Dependency Injection ที่สร้างคลาส
+- สำหรับ widget  ไม่ต้องแก้ทั้งหมดเลย ปล่อยเหมือนเดิมได้
 ```
 
 ### ขั้นตอนที่ 5.2: **นักศึกษาเขียน Code เอง** — ItemRepositoryFirestore
@@ -356,7 +363,9 @@ final pages = [
 > ✅ **Checkpoint 5.1** ถ่ายภาพหน้าจอ Home ที่แสดงสินค้าจากทั้งสองแหล่งข้อมูลปนกันอยู่ในลิสต์เดียว พร้อม Badge ที่แยกแหล่งที่มาชัดเจน (ถ้ายังไม่เคยมีประกาศจริงใน Firestore เลย ให้ทำส่วนที่ 6 ให้เสร็จก่อนแล้วย้อนกลับมาถ่ายภาพ Checkpoint นี้) อธิบายว่าการออกแบบให้ `HomePage` ไม่รู้จัก `ItemRepositoryApi`/`ItemRepositoryFirestore` โดยตรง แต่รู้จักผ่าน Interface `ItemRepository` เท่านั้น ช่วยให้ทดสอบหรือเปลี่ยนแหล่งข้อมูลในอนาคตง่ายขึ้นอย่างไร
 
 ```text
-บันทึกรูปผลลัพธ์ที่นี่ และคำอธิบาย
+
+- อธิบายว่าการออกแบบให้ `HomePage` ไม่รู้จัก `ItemRepositoryApi`/`ItemRepositoryFirestore` โดยตรง แต่รู้จักผ่าน Interface `ItemRepository` เท่านั้น ช่วยให้ทดสอบหรือเปลี่ยนแหล่งข้อมูลในอนาคตง่ายขึ้นอย่างไร
+ตอบ ช่วยเรื่อง Decoupling (การลดการผูกมัดของโค้ด) ทำให้ง่ายต่อการ Unit Test และง่ายต่อการขยาย Data Source ในอนาคต
 ```
 
 ---
