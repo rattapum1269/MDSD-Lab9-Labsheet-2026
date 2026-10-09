@@ -36,9 +36,8 @@
 
 > ✅ **Checkpoint 1.1** ถ่ายภาพหน้าจอ Firebase Console ที่แสดงหน้า Project Overview ของโปรเจกต์ที่สร้างเสร็จแล้ว
 
-```text
-บันทึกรูปผลลัพธ์ที่นี่
-```
+<img width="1907" height="1015" alt="image" src="https://github.com/user-attachments/assets/7a360cb2-18e3-4ac2-864b-1a11752c4e1a" />
+
 
 ### ขั้นตอนที่ 1.2: 🔧 ทำตามขั้นตอน — ติดตั้งเครื่องมือและเชื่อมโปรเจกต์ด้วย FlutterFire CLI
 
@@ -159,10 +158,16 @@ Future<void> main() async {
 
 > ✅ **Checkpoint 2.1** ทดสอบสมัครสมาชิกด้วย Email ใหม่สำเร็จ ถ่ายภาพหน้าจอ Firebase Console เมนู Authentication → Users ที่แสดงบัญชีที่เพิ่งสมัคร จากนั้นทดสอบกรณีผิดพลาด 2 กรณี คือ (ก) สมัครซ้ำด้วย Email เดิม และ (ข) ใส่รหัสผ่านสั้นเกินไป ถ่ายภาพหน้าจอข้อความ Error ทั้งสองกรณี พร้อมอธิบายว่าโค้ดส่วนใดใน `auth_service.dart` เป็นตัวจัดการแต่ละกรณี
 
-```text
-บันทึกรูปผลลัพธ์ที่นี่ และคำอธิบายของแต่ละกรณี
-```
 
+<img width="1575" height="770" alt="image" src="https://github.com/user-attachments/assets/6a3e4cea-3123-49f7-85a5-191f1698e138" />
+
+<img width="1080" height="2400" alt="Screenshot_20261009_135642" src="https://github.com/user-attachments/assets/14ffc14b-0701-480c-8580-7ff16391b00c" />
+
+<img width="1080" height="2400" alt="Screenshot_20261009_135604" src="https://github.com/user-attachments/assets/72ee8019-5e96-43ed-8739-f20a752b2887" />
+
+- โค้ดส่วนที่จัดการกรณีเหล่านี้อยู่ในเมธอด _handleAuthException(FirebaseAuthException e) ในไฟล์ lib/services/auth_service.dart:
+   - กรณี (ก) สมัครซ้ำด้วย Email เดิม: ถูกดักจับด้วยเคส case 'email-already-in-use':
+   - กรณี (ข) รหัสผ่านสั้นเกินไป: ถูกดักจับด้วยเคส case 'weak-password':
 ---
 
 ## ส่วนที่ 3: เข้าสู่ระบบด้วย Google Sign-In
@@ -185,9 +190,9 @@ cd android && ./gradlew signingReport
 
 > ✅ **Checkpoint 3.1** ทดสอบกดปุ่มเข้าสู่ระบบด้วย Google ด้วยบัญชี Google จริงของคุณ ถ่ายภาพหน้าจอตอนเลือกบัญชี Google และภาพหน้าจอ Firebase Console ที่แสดงว่ามีผู้ใช้ใหม่ Provider เป็น Google เพิ่มเข้ามา อธิบายว่า `idToken` กับ `accessToken` ที่ได้จาก Google นำไปใช้ทำอะไรต่อในขั้นตอนการยืนยันตัวตนกับ Firebase (อ้างอิงหัวข้อ 9.4)
 
-```text
-บันทึกรูปผลลัพธ์ที่นี่ และคำอธิบาย
-```
+<img width="1647" height="837" alt="image" src="https://github.com/user-attachments/assets/4f70ddd6-2334-4bbe-bc2c-f9fae1ac27aa" />
+<img width="1080" height="2400" alt="Screenshot_20261009_141800" src="https://github.com/user-attachments/assets/90b36bff-4961-4942-89dd-c3cdcd5aaeb7" />
+
 
 ---
 
